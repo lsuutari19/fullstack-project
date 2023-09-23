@@ -1,0 +1,16 @@
+
+
+input, textarea {
+  width: 30%;
+  padding: 0.3%;
+  text-align: left;
+}
+
+textarea {
+  resize: vertical;
+}
+
+input[type="submit"] {
+  width: auto;
+  margin-right: 1%;
+}
