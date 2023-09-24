@@ -35,13 +35,18 @@ public class BookController {
     }
 
     @PostMapping("/books")
-    public ResponseEntity<String> postBook(@RequestBody Book newBook) {
-        bookService.postBook(newBook);
-        return new ResponseEntity<String>("Book added successfully!", HttpStatus.CREATED);
+    public ResponseEntity<?> postBook(@RequestBody Book newBook) {
+        ResponseEntity<?> response = bookService.postBook(newBook);
+        return response;
     }
 
-    @DeleteMapping("/book")
+    @DeleteMapping("/books")
     public void deleteBook(@RequestParam Integer id) {
         bookService.deleteBook(id);
+    }
+
+    @PutMapping("/book")
+    public void changeBook(@RequestBody Book oldBook) {
+        bookService.changeBook(oldBook);
     }
 }

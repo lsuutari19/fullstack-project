@@ -31,30 +31,13 @@ function SubmitForm({ selectedBook }) {
     }
   }, [selectedBook]);
 
+  if(selectedBook) {
+    saveButton.disabled = false;
+    deleteButton.disabled = false;
+  }
+
   const handleSubmit = async (event) => {
     const { author, title, description } = formData;
-
-    if (author.length === 0 || title.length === 0 || description.length === 0) {
-      event.preventDefault(); // Prevent default form submission
-      alert("All fields must be filled out!");
-      return;
-    }
-
-    if (!isNaN(+author) || !isNaN(+title) || !isNaN(+description)) {
-      event.preventDefault(); // Prevent default form submission
-      alert("Values must be strings!");
-      return;
-    }
-
-    alert(
-      "author: " +
-        author +
-        "\ntitle: " +
-        title +
-        "\ndescription: " +
-        description +
-        "\n Added to the book list"
-    );
     var res = "null";
 
     if (event.nativeEvent.submitter.value === "Save new") {
@@ -80,9 +63,19 @@ function SubmitForm({ selectedBook }) {
           },
         }
       );
+    } else if (event.nativeEvent.submitter.value === "Save") {
+      // PUT request
+      res = await axios.put(
+        `/book?id=${formData.id}`,
+        JSON.stringify({ author, title, description }),
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
     }
-    console.log(res);
-    // Handle your POST or DELETE request here based on the submit button value
+    alert(res);
   };
 
   const handleInputChange = (e) => {
