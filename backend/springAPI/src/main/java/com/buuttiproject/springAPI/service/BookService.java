@@ -17,10 +17,9 @@ import java.util.regex.Pattern;
 public class BookService {
 
     private List<Book> bookList;
-    private BookRepository repository;
 
     @Autowired
-    public BookService(BookRepository repository) {
+    public BookService() {
         bookList = new ArrayList<>();
         Book book = new Book("author", "title", "description");
         Book book1 = new Book("luri", "lurin title", "lurin description");
@@ -77,8 +76,9 @@ public class BookService {
         }
     }
 
-    public Flux<Book> getBooks() {
-        return repository.findAll();
+    public ArrayList getBooks() {
+        System.out.println(bookList);
+        return (ArrayList) bookList;
     }
 
     // TO-DO implement POST request to add books to database

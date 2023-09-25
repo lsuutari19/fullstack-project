@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 
+import java.util.ArrayList;
+
 @RestController
 public class BookController {
 
@@ -18,7 +20,7 @@ public class BookController {
     }
 
     @GetMapping("/books")
-    public Flux<Book> getBooks() {
+    public ArrayList getBooks() {
         return bookService.getBooks();
     }
 
