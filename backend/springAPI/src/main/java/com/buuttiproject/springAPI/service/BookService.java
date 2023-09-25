@@ -1,12 +1,13 @@
 package com.buuttiproject.springAPI.service;
 
 import com.buuttiproject.springAPI.model.Book;
-import com.buuttiproject.springAPI.controller.repository.BookRepository;
+import com.buuttiproject.springAPI.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
+import reactor.core.publisher.Flux;
 
 import java.util.*;
 import java.util.regex.Pattern;
@@ -16,17 +17,15 @@ import java.util.regex.Pattern;
 public class BookService {
 
     private List<Book> bookList;
-    private final BookRepository bookRepository;
+    private BookRepository repository;
 
     @Autowired
-    public BookService(BookRepository bookRepository) {
-        this.bookRepository = bookRepository;
+    public BookService(BookRepository repository) {
         bookList = new ArrayList<>();
         Book book = new Book("author", "title", "description");
         Book book1 = new Book("luri", "lurin title", "lurin description");
         bookList.addAll(Arrays.asList(book, book1));
-        bookRepository.save(book);
-        bookRepository.save(book1);
+
     }
 
     public ResponseEntity<?> checkInputvalues(@RequestBody Book bookData) {
@@ -78,9 +77,8 @@ public class BookService {
         }
     }
 
-    public ArrayList getBooks() {
-        System.out.println(bookList);
-        return (ArrayList) bookList;
+    public Flux<Book> getBooks() {
+        return repository.findAll();
     }
 
     // TO-DO implement POST request to add books to database

@@ -5,7 +5,8 @@ import com.buuttiproject.springAPI.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import reactor.core.publisher.Flux;
+
+import java.util.List;
 
 @RestController
 public class BookController {
@@ -18,22 +19,22 @@ public class BookController {
     }
 
     @GetMapping("/books")
-    public Flux<Book> getBooks() {
+    public ResponseEntity<List<Book>> getBooks() {
         return bookService.getBooks();
     }
 
     @PostMapping("/books")
     public ResponseEntity<?> postBook(@RequestBody Book newBook) {
-        return ResponseEntity.ok("asd");
+        return bookService.postBook(newBook);
     }
 
     @DeleteMapping("/book")
-    public void deleteBook(@RequestParam Integer id) {
-        bookService.deleteBook(id);
+    public ResponseEntity<?> deleteBook(Integer id) {
+        return bookService.deleteBook(id);
     }
 
     @PutMapping("/book")
-    public void changeBook(@RequestBody Book oldBook) {
-        bookService.changeBook(oldBook);
+    public ResponseEntity<?> changeBook(@RequestBody Book oldBook) {
+        return bookService.changeBook(oldBook);
     }
 }
