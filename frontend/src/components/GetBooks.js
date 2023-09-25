@@ -25,7 +25,7 @@ const [books, setBooks] = useState([]);
         {books.map((book, index) => (
             <ul key= {index} onClick={() => handleBookSelect(book)}>
                 <p>
-                    {book.id}, {book.author}, {book.title}, {book.description}
+                    {index + 1}, {book.author}, {book.title}, {book.description}
                 </p>
             </ul> 
         ))}

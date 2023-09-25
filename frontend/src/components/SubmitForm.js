@@ -54,20 +54,16 @@ function SubmitForm({ selectedBook }) {
       );
     } else if (event.nativeEvent.submitter.value === "Delete") {
       // DELETE request
+      alert("id" + formData.id)
       res = await axios.delete(
-        `/book?id=${formData.id}`,
-        JSON.stringify({ author, title, description }),
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
+        `/book?id=${formData.id}`
       );
     } else if (event.nativeEvent.submitter.value === "Save") {
       // PUT request
+      alert("id" + formData.id)
       res = await axios.put(
-        `/book?id=${formData.id}`,
-        JSON.stringify({ author, title, description }),
+        `/book`,
+        JSON.stringify({ id: formData.id, author, title, description }),
         {
           headers: {
             "Content-Type": "application/json",

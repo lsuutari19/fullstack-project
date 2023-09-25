@@ -1,30 +1,32 @@
 package com.buuttiproject.springAPI.service;
 
 import com.buuttiproject.springAPI.model.Book;
+import com.buuttiproject.springAPI.controller.repository.BookRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.*;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 
 @Service
 public class BookService {
 
     private List<Book> bookList;
+    private final BookRepository bookRepository;
 
-    public BookService() {
+    @Autowired
+    public BookService(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
         bookList = new ArrayList<>();
-        // TO-DO implement mongodb queries here to get all books from the database
-        // TO-DO implement a better way to index objects perhaps some kind of random generated id
-        // this way we do not need to reindex variables after deletion of old objects
         Book book = new Book("author", "title", "description");
         Book book1 = new Book("luri", "lurin title", "lurin description");
         bookList.addAll(Arrays.asList(book, book1));
+        bookRepository.save(book);
+        bookRepository.save(book1);
     }
 
     public ResponseEntity<?> checkInputvalues(@RequestBody Book bookData) {
@@ -40,7 +42,7 @@ public class BookService {
 
             statusBody = "Input values must be greater than 0";
         }
-        if (!pattern.matcher(bookAuthor).find() || !pattern.matcher(bookTitle).find()) {
+        if (pattern.matcher(bookAuthor).find() || pattern.matcher(bookTitle).find()) {
             if(statusBody == "") {
                 statusBody = "Author and Title must not contain special values other than !";
             } else {
@@ -91,13 +93,16 @@ public class BookService {
 
     public void changeBook(Book changedBook) {
         Iterator<Book> iterator = bookList.iterator();
+        System.out.println(changedBook.getTitle() + changedBook.getId() + changedBook.getAuthor());
         while(iterator.hasNext()) {
             Book book = iterator.next();
-            System.out.println(changedBook.getTitle());
+            System.out.println("Old book id:" + book.getId());
+            System.out.println("Changed book id:" + changedBook.getId());
             if(book.getId() == changedBook.getId()) {
                 book.setTitle(changedBook.getTitle());
                 book.setAuthor(changedBook.getAuthor());
                 book.setDescription(changedBook.getDescription());
+                System.out.println("New book title:" + book.getTitle());
                 return;
             }
         }

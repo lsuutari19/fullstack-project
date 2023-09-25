@@ -1,9 +1,11 @@
 package com.buuttiproject.springAPI.model;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+@Document("books")
 public class Book {
     private static AtomicInteger ID_GENERATOR = new AtomicInteger(0);
     private int id;
