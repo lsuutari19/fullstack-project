@@ -4,6 +4,24 @@ database to store book information. Inputs that the user can submit are Title(St
 & Description (String). ID generation happens automatically in the backend.  Validation of inputs are handled on backend level,
 with the requirements being that none of the inputs are null and that title and author do not contain special characters besides !.
 
+### Example about input validation:
+Not allowed:
+```
+title: ""
+author: "J.K. Rowling"
+description: "..."
+```
+```
+title: "@@@Harry Potter"
+author: "J.K. Rowling"
+description: "..."
+```
+Allowed:
+```
+title: "Harry Potter"
+author: "J.K. Rowling"
+description: "..."
+```
 
 ## Future work
   - Dockerize the backend and frontend so that the application works out of box on any machine
