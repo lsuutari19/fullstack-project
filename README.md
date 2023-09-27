@@ -29,6 +29,7 @@ description: "..."
   - Prettify frontend
   - Testing for endpoints (W.I.P.)
   - Deploy in Cloud
+  - CircleCI for automatic testing on push to main
 
 ## Requirements:
   - Java (preferrably 17)
