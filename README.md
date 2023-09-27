@@ -25,7 +25,7 @@ description: "..."
 
 ## Future work
   - Dockerize the backend and frontend so that the application works out of box on any machine
-  - Frontend validation
+  - Frontend validation (i.e. dont let user even send data that doesnt meet the requirements)
   - Prettify frontend
   - Testing for endpoints (W.I.P.)
   - Deploy in Cloud
