@@ -19,8 +19,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class BookApiTests {
     private static final String END_POINT_PATH = "/books";
 
-    @Autowired private MockMvc mockMvc;
-    @Autowired private ObjectMapper objectMapper;
+    @Autowired
+    private MockMvc mockMvc;
+    @Autowired
+    private ObjectMapper objectMapper;
     @MockBean
     private BookService service;
 
@@ -40,6 +42,7 @@ public class BookApiTests {
                 .andDo(print())
         ;
     }
+
     @Test
     public void testAddShouldReturn500() throws Exception {
         Book newBook = new Book("J.P Morris", "", "This is a description");

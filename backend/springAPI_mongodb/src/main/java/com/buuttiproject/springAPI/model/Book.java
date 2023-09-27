@@ -14,7 +14,7 @@ public class Book {
     private String title;
     private String description;
 
-    public Book(String author, String title, String description){
+    public Book(String author, String title, String description) {
         this.id = ID_GENERATOR.getAndIncrement();
         this.author = author;
         this.title = title;

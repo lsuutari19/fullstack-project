@@ -30,18 +30,18 @@ public class BookService {
         Pattern pattern = Pattern.compile("[^A-Za-z0-9!. ]");
         String statusBody = "";
         System.out.println(bookTitle + bookDescription + bookAuthor);
-        if(bookTitle.length() == 0 || bookAuthor.length() == 0 || bookDescription.length() == 0) {
+        if (bookTitle.length() == 0 || bookAuthor.length() == 0 || bookDescription.length() == 0) {
 
             statusBody = "Input values must be greater than 0";
         }
         if (pattern.matcher(bookAuthor).find() || pattern.matcher(bookTitle).find()) {
-            if(statusBody == "") {
+            if (statusBody == "") {
                 statusBody = "Author and Title must not contain special values other than !";
             } else {
                 statusBody = statusBody + "\n" + "Author and Title must not contain special values other than !";
             }
         }
-        if(statusBody == "") {
+        if (statusBody == "") {
             return new ResponseEntity<>("Book created successfully.", HttpStatus.OK);
         } else {
             System.out.println("statusBody:" + statusBody);
@@ -58,7 +58,7 @@ public class BookService {
     public ResponseEntity<String> deleteBook(Integer id) {
         // used to delete a book by its id
         Optional<Book> book = this.repository.findById(id);
-        if(book.isPresent()) {
+        if (book.isPresent()) {
             this.repository.deleteById(id);
             return ResponseEntity.ok("Successfully deleted book.");
         } else {
@@ -68,18 +68,18 @@ public class BookService {
 
     public ResponseEntity<?> postBook(Book newBook) {
         // used to add a book into the database
-        if(checkInputvalues(newBook).getStatusCode() == HttpStatus.OK) {
+        if (checkInputvalues(newBook).getStatusCode() == HttpStatus.OK) {
             this.repository.save(newBook);
         }
         return checkInputvalues(newBook);
     }
 
-    public  ResponseEntity<?> changeBook(Book changedBook) {
+    public ResponseEntity<?> changeBook(Book changedBook) {
         // used to change values of a book by its id
         Integer id = changedBook.getId();
         Optional<Book> book = this.repository.findById(id);
-        if(checkInputvalues(changedBook).getStatusCode() == HttpStatus.OK) {
-            if(book.isPresent()) {
+        if (checkInputvalues(changedBook).getStatusCode() == HttpStatus.OK) {
+            if (book.isPresent()) {
                 this.repository.save(changedBook);
                 return ResponseEntity.ok("Successfully modified book.");
             } else {
