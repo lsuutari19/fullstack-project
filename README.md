@@ -38,3 +38,5 @@ Windows
   SET DB_PASSWORD=<your mongodb password>
   sh start.sh
 ```
+
+Or alternatively you can just set the spring.data.mongodb.uri environment variable to match your connection string.
