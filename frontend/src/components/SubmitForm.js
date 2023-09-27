@@ -10,9 +10,6 @@ function SubmitForm({ selectedBook }) {
   const saveButton = document.getElementById("saveButton");
   const deleteButton = document.getElementById("deleteButton");
 
-  // TO-DO implement enabling of savebutton, deletebutton if an item has been selected
-  // TO-DO implement some way of clearing chosen item so that users can cancel operation (button?)
-
   useEffect(() => {
     if (selectedBook) {
       setFormData({
@@ -31,7 +28,7 @@ function SubmitForm({ selectedBook }) {
     }
   }, [selectedBook]);
 
-  if(selectedBook) {
+  if (selectedBook) {
     saveButton.disabled = false;
     deleteButton.disabled = false;
   }
@@ -42,36 +39,64 @@ function SubmitForm({ selectedBook }) {
 
     if (event.nativeEvent.submitter.value === "Save new") {
       // POST request
-      res = await axios.post(
-        "/books",
-        JSON.stringify({ author, title, description }),
-        {
+      res = await axios
+        .post("/books", JSON.stringify({ title, author, description }), {
           headers: {
             // Overwrite Axios's automatically set Content-Type
             "Content-Type": "application/json",
           },
-        }
-      );
+        })
+        .catch(function (error) {
+          if (error.response) {
+            alert(
+              error.response.data,
+              error.response.status,
+              error.response.headers
+            );
+          } else if (error.request) {
+            alert(error.request);
+          }
+        });
     } else if (event.nativeEvent.submitter.value === "Delete") {
       // DELETE request
-      alert("id" + formData.id)
-      res = await axios.delete(
-        `/book?id=${formData.id}`
-      );
+      res = await axios
+        .delete(`/book?id=${formData.id}`)
+        .catch(function (error) {
+          if (error.response) {
+            alert(
+              error.response.data,
+              error.response.status,
+              error.response.headers
+            );
+          } else if (error.request) {
+            alert(error.request);
+          }
+        });
     } else if (event.nativeEvent.submitter.value === "Save") {
       // PUT request
-      alert("id" + formData.id)
-      res = await axios.put(
-        `/book`,
-        JSON.stringify({ id: formData.id, author, title, description }),
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      res = await axios
+        .put(
+          `/book`,
+          JSON.stringify({ id: formData.id, title, author, description }),
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .catch(function (error) {
+          if (error.response) {
+            alert(
+              error.response.data,
+              error.response.status,
+              error.response.headers
+            );
+          } else if (error.request) {
+            alert(error.request);
+          }
+        });
     }
-    alert(res);
+    alert(res.data);
   };
 
   const handleInputChange = (e) => {
@@ -87,6 +112,7 @@ function SubmitForm({ selectedBook }) {
       <div>
         <p>Title</p>
         <input
+          className="Submit"
           type="text"
           name="title"
           value={formData.title}
@@ -96,23 +122,37 @@ function SubmitForm({ selectedBook }) {
       <div>
         <p>Author</p>
         <input
+          className="Submit"
           type="text"
           name="author"
           value={formData.author}
           onChange={handleInputChange}
         />
       </div>
-      <div>
+      <div className="Submit">
         <p>Description</p>
         <textarea
+          className="Submit"
           name="description"
           value={formData.description}
           onChange={handleInputChange}
         />
       </div>
-      <input type="submit" value="Save new" />
-      <input type="submit" id="saveButton" value="Save" disabled />
-      <input type="submit" id="deleteButton" value="Delete" disabled />
+      <input type="submit" className="button" value="Save new" />
+      <input
+        type="submit"
+        className="button"
+        id="saveButton"
+        value="Save"
+        disabled
+      />
+      <input
+        type="submit"
+        className="button"
+        id="deleteButton"
+        value="Delete"
+        disabled
+      />
     </form>
   );
 }

@@ -20,12 +20,12 @@ const [books, setBooks] = useState([]);
 
   // implement selection of each item for deletion/modifying
   return (
-    <div>
+    <div className="Table">
       <p>List of books:</p>
         {books.map((book, index) => (
             <ul key= {index} onClick={() => handleBookSelect(book)}>
-                <p>
-                    {index + 1}, {book.author}, {book.title}, {book.description}
+                <p className="Book">
+                    Title: {book.title} <br></br> Author: {book.author} <br></br> Description: {book.description}
                 </p>
             </ul> 
         ))}

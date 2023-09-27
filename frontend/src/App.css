@@ -1,16 +1,58 @@
+body {
+  width: 100%;
+}
 
+.App {
+  display: flex;
+  max-width: 100%;
+  justify-content: center;
+}
 
-input, textarea {
-  width: 30%;
+.Submit {
+  max-width: 300px;
+  min-width: 300px;
   padding: 0.3%;
   text-align: left;
+  padding-top: 2%;
 }
 
 textarea {
+  height: 100px;
   resize: vertical;
 }
 
 input[type="submit"] {
   width: auto;
-  margin-right: 1%;
+  margin-right: 5%;
+}
+
+ul {
+  white-space: nowrap;
+  overflow: hidden;
+  white-space: normal; /* Allow long content to wrap */
+  flex: 1;
+}
+
+.Book:hover {
+  background-color: aliceblue;
+}
+
+.Table {
+  padding: 0.3%;
+  padding-left: 3%;
+  max-width: 500px;
+}
+
+.Books {
+  padding-top: 2%;
+}
+
+.button {
+  margin-top: 3%;
+  margin-bottom: 3%;
+}
+
+.button:hover:enabled {
+  background-color: #7dcfe4;
+  transition: 0.7s;
 }

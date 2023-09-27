@@ -7,8 +7,12 @@ function App() {
   const [selectedBook, setSelectedBook] = useState(null);
   return (
     <div className="App">
-      <SubmitForm selectedBook={selectedBook}></SubmitForm>
-      <GetBooks setSelectedBook={setSelectedBook}></GetBooks>
+      <div className="Submit">
+        <SubmitForm selectedBook={selectedBook}></SubmitForm>
+      </div>
+      <div className="Books">
+        <GetBooks setSelectedBook={setSelectedBook}></GetBooks>
+      </div>
     </div>
   );
 }
