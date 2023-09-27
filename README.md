@@ -44,6 +44,7 @@ If youre someone who isn't at all related to this project you do also need to ed
 ./backend/springAPI_mongodb/src/main/resources/application.properties to match your connection string that is
 given in the tutorial.
 
+### NOTE: If you are a Buutti developer the credentials should be provided by the corresponding recruiter.
 
 Linux
 ```
