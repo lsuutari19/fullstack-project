@@ -28,7 +28,6 @@ description: "..."
   - Frontend validation (i.e. dont let user even send data that doesnt meet the requirements)
   - Prettify frontend
   - Testing for endpoints (W.I.P.)
-  - Deploy in Cloud
   - CircleCI for automatic testing on push to main
 
 ## Requirements:
